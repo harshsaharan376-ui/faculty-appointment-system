@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Faculty Appointment Scheduling System</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;700&family=Source+Sans+3:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="top">
+    <h1>Faculty Appointment Scheduling</h1>
+    <p>Find a professor's office hours and book a 15-minute slot, so you never walk to a locked cabin again.</p>
+  </header>
+
+  <main class="layout">
+    <section class="panel directory" aria-labelledby="dir-h">
+      <h2 id="dir-h">Faculty directory</h2>
+      <div class="filters">
+        <input id="search" type="search" placeholder="Search name or subject" aria-label="Search faculty by name or subject">
+        <select id="dept" aria-label="Filter by department"></select>
+      </div>
+      <div id="facultyList" class="faculty-list"></div>
+    </section>
+
+    <section class="panel schedule" aria-labelledby="sch-h">
+      <div class="sch-head">
+        <div>
+          <h2 id="sch-h">Weekly office hours</h2>
+          <p id="selectedInfo" class="muted"></p>
+        </div>
+        <div class="week-nav">
+          <button id="prevWeek" class="btn ghost" aria-label="Previous week">Previous</button>
+          <span id="weekLabel"></span>
+          <button id="nextWeek" class="btn ghost" aria-label="Next week">Next</button>
+        </div>
+      </div>
+      <ul class="legend">
+        <li><i class="sw open"></i>Open</li>
+        <li><i class="sw booked"></i>Booked</li>
+        <li><i class="sw mine"></i>Your booking</li>
+      </ul>
+      <div id="gridWrap" class="grid-wrap"></div>
+    </section>
+
+    <section class="panel mine-panel" aria-labelledby="my-h">
+      <h2 id="my-h">My appointments</h2>
+      <div id="myList"></div>
+    </section>
+  </main>
+
+  <dialog id="bookDialog">
+    <form id="bookForm" novalidate>
+      <h3>Book appointment</h3>
+      <p id="bookSummary" class="muted"></p>
+      <label>Student name
+        <input id="fName" required minlength="2" autocomplete="name">
+      </label>
+      <label>Roll number
+        <input id="fRoll" required inputmode="numeric" placeholder="8 digits, e.g. 12608843">
+      </label>
+      <label>Subject code
+        <input id="fSubject" required placeholder="e.g. CSE326">
+      </label>
+      <label>Discussion topic
+        <textarea id="fTopic" rows="3" required minlength="5" placeholder="What do you want to discuss?"></textarea>
+      </label>
+      <p id="formError" class="error" role="alert"></p>
+      <div class="actions">
+        <button type="button" id="cancelBook" class="btn ghost">Close</button>
+        <button type="submit" class="btn">Confirm booking</button>
+      </div>
+    </form>
+  </dialog>
+
+  <dialog id="slipDialog">
+    <div id="slip" class="slip"></div>
+    <div class="actions no-print">
+      <button id="slipCancel" class="btn danger">Cancel appointment</button>
+      <button id="slipPrint" class="btn ghost">Print slip</button>
+      <button id="slipClose" class="btn">Close</button>
+    </div>
+  </dialog>
+
+  <div id="toast" class="toast" role="status"></div>
+  <script src="script.js"></script>
+</body>
+</html>
